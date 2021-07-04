@@ -3,15 +3,16 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node server.js",
-    "postinstall": "ng build --aot --prod",
+    "start": "ng serve",
+    "build": "ng build --prod",
+    "test": "ng test",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "postinstall": "ng build --prod"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "~12.1.1",
-    "@angular/cli": "^12.1.1",
     "@angular/common": "~12.1.1",
     "@angular/compiler": "~12.1.1",
     "@angular/core": "~12.1.1",
@@ -26,6 +27,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~12.1.1",
+    "@angular/cli": "^12.1.1",
     "@angular/compiler-cli": "^12.1.1",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
