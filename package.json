@@ -1,6 +1,9 @@
 {
   "name": "oblako-angular",
   "version": "0.0.0",
+  "engines": {
+   "node": "15.0.1"
+   },
   "scripts": {
     "ng": "ng",
     "start": "node server.js",

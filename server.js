@@ -13,8 +13,4 @@ app.get('/*', (req, res) =>
     res.sendFile('index.html', {root: 'dist/OblakoAngular/'}),
 );
 
-const port = process.env.PORT || 3000;
-app.set('port', port);
-
-const server = http.createServer(app);
-server.listen(port, () => console.log("running"));
+app.listen( process.env.PORT || 3000);
