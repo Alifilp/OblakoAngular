@@ -7,10 +7,14 @@ const app = express();
 
 app.use(compression());
 
-app.use(express.static('./dist/OblakoAngular'));
+app.use(express.static(path.join(__dirname, 'dist/OblakoAngular')));
 
-app.get('/*', (req, res) =>
-    res.sendFile('index.html', {root: 'dist/OblakoAngular/'}),
-);
+app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist/OblakoAngular/index.html'));
+});
 
-app.listen( process.env.PORT || 3000);
+const port = process.env.PORT || 3000;
+app.set('port', port);
+
+const server = http.createServer(app);
+server.listen(port, () => console.log("running"));
