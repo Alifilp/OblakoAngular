@@ -1,0 +1,20 @@
+<form [formGroup]="taskForm">
+<h1 mat-dialog-title>Новая задача</h1>
+<div mat-dialog-content>
+   <mat-form-field appearance="fill">
+    <input matInput formControlName= 'title' />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Категория</mat-label>
+    <mat-select formControlName="project_id">
+      <mat-option *ngFor="let prj of prjs" [value]="prj.id" >
+        {{prj.title}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button>Отмена</button>
+  <button mat-button >Ок</button>
+</div>
+</form>

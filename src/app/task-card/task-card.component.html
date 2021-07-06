@@ -1,0 +1,9 @@
+<mat-card>{{prj?.title}}</mat-card>
+<div *ngFor="let todo of prj.items">
+  <section class="example-section">
+    <mat-checkbox class="example-margin" (change)="onCheckBoxUpdate(todo.id) " [checked]="todo.is_completed"
+    [color]="">
+      <span>{{todo?.title}}</span></mat-checkbox>
+  </section>
+</div>
+

@@ -1,0 +1,124 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "Семья",
+      "created_at": "2021-07-03T19:47:08.921Z",
+      "updated_at": "2021-07-03T19:47:08.921Z",
+      "todos": [
+        {
+          "id": 1,
+          "project_id": 1,
+          "title": "Купить молоко",
+          "is_completed": false,
+          "created_at": "2021-07-03T19:47:09.015Z",
+          "updated_at": "2021-07-03T19:47:09.015Z"
+        },
+        {
+          "id": 4,
+          "project_id": 1,
+          "title": "Заменить масло в двигателе до 23 апреля",
+          "is_completed": false,
+          "created_at": "2021-07-03T19:49:00.845Z",
+          "updated_at": "2021-07-03T19:49:00.845Z"
+        },
+        {
+          "id": 5,
+          "project_id": 1,
+          "title": "Отправить письмо бабушке",
+          "is_completed": true,
+          "created_at": "2021-07-03T19:49:13.033Z",
+          "updated_at": "2021-07-03T19:51:38.906Z"
+        },
+        {
+          "id": 6,
+          "project_id": 1,
+          "title": "Заплатить за квартиру",
+          "is_completed": false,
+          "created_at": "2021-07-03T19:49:22.283Z",
+          "updated_at": "2021-07-03T19:49:22.283Z"
+        },
+        {
+          "id": 7,
+          "project_id": 1,
+          "title": "Забрать обувь из ремонта",
+          "is_completed": false,
+          "created_at": "2021-07-03T19:49:31.176Z",
+          "updated_at": "2021-07-03T19:49:31.176Z"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Работа",
+      "created_at": "2021-07-03T19:47:28.692Z",
+      "updated_at": "2021-07-03T19:47:28.692Z",
+      "todos": [
+        {
+          "id": 2,
+          "project_id": 2,
+          "title": "Позвонить заказчику",
+          "is_completed": true,
+          "created_at": "2021-07-03T19:47:28.720Z",
+          "updated_at": "2021-07-03T19:53:20.183Z"
+        },
+        {
+          "id": 8,
+          "project_id": 2,
+          "title": "Позвонить заказчику",
+          "is_completed": true,
+          "created_at": "2021-07-03T19:49:46.907Z",
+          "updated_at": "2021-07-03T19:52:44.362Z"
+        },
+        {
+          "id": 9,
+          "project_id": 2,
+          "title": "Отправить документы",
+          "is_completed": false,
+          "created_at": "2021-07-03T19:49:55.418Z",
+          "updated_at": "2021-07-03T19:49:55.418Z"
+        },
+        {
+          "id": 10,
+          "project_id": 2,
+          "title": "Заполнить отчет",
+          "is_completed": false,
+          "created_at": "2021-07-03T19:50:03.641Z",
+          "updated_at": "2021-07-03T19:50:03.641Z"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Прочее",
+      "created_at": "2021-07-03T19:47:49.982Z",
+      "updated_at": "2021-07-03T19:47:49.982Z",
+      "todos": [
+        {
+          "id": 3,
+          "project_id": 3,
+          "title": "Позвонить другу",
+          "is_completed": false,
+          "created_at": "2021-07-03T19:47:49.991Z",
+          "updated_at": "2021-07-03T19:47:49.991Z"
+        },
+        {
+          "id": 11,
+          "project_id": 3,
+          "title": "Позвонить другу",
+          "is_completed": false,
+          "created_at": "2021-07-03T19:50:14.045Z",
+          "updated_at": "2021-07-03T19:50:14.045Z"
+        },
+        {
+          "id": 12,
+          "project_id": 3,
+          "title": "Подготовиться к поездке",
+          "is_completed": false,
+          "created_at": "2021-07-03T19:50:26.298Z",
+          "updated_at": "2021-07-03T19:50:26.298Z"
+        }
+      ]
+    }
+  ]
+}
