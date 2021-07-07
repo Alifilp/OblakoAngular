@@ -16,6 +16,9 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {MatSelectModule} from "@angular/material/select";
 import {MatOptionModule} from "@angular/material/core";
 import {MatInputModule} from "@angular/material/input";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from "@angular/material/button";
 
 
 @NgModule({
@@ -24,20 +27,23 @@ import {MatInputModule} from "@angular/material/input";
     TaskCardComponent,
     DialogComponent
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatGridListModule,
-    MatFormFieldModule,
-    MatDialogModule,
-    MatSelectModule,
-    MatOptionModule,
-    MatInputModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatCheckboxModule,
+        MatGridListModule,
+        MatFormFieldModule,
+        MatDialogModule,
+        MatSelectModule,
+        MatOptionModule,
+        MatInputModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

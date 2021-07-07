@@ -1,0 +1,10 @@
+.example-button-row {
+  display: table-cell;
+  width: 490px;
+}
+.my-input{
+  width: 100%;
+}
+.my-button{
+  width: 48%!important;
+}

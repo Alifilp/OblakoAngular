@@ -1,9 +1,19 @@
-<mat-grid-list cols="3" rowHeight="300px">
-<div *ngFor="let project of projects$ | async">
-  <mat-grid-tile><app-card [prj] = "project" (onTodoUpdate)="updateTodo(project.id, $event)"></app-card>
+<mat-toolbar class="toolbar">
+  <span class="centreSpan">Задачи</span>
+  <span class="example-spacer"></span>
+  <!--Кнопка для вызова диалогового окна, передает данные-->
+  <button class="transpanentButton" *ngIf="projects$ | async as projects" mat-icon-button (click)="openDialog(projects)"
+          aria-label="Example icon-button with heart icon">
+    <mat-icon>add</mat-icon>
+  </button>
+</mat-toolbar>
+<body>
+<mat-grid-list cols="3" rowHeight="350px" >
+  <div *ngFor="let project of projects$ | async">
+    <mat-grid-tile>
+      <app-card [project] = "project" (onTodoUpdate)="updateTodo(project.id, $event)"></app-card>
     </mat-grid-tile>
-</div>
+  </div>
 </mat-grid-list>
-
-<button *ngIf="projects$ | async as projects" mat-raised-button (click)="openDialog(projects)">Pick one</button>
+</body>
 

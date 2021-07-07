@@ -9,8 +9,9 @@ import {ITodoDtm, Project} from "./todos";
 @Injectable()
 export class HttpService{
 
-  constructor(private http: HttpClient){ }
   base_url = 'https://aqueous-reaches-03865.herokuapp.com/';
+  constructor(private http: HttpClient){ }
+
   getData(): Observable<Project[]>{
     return this.http.get(`${this.base_url}projects`).pipe(map((data:any)=>{
         return data.map(function(prj: any): Project {
@@ -21,7 +22,7 @@ export class HttpService{
   patchData(project_id: number, todo_id: number):Observable<any>{
     return this.http.patch(`${this.base_url}projects/${project_id}/todos/${todo_id}`, {});
   }
-  postData(project_id: number, todo: ITodoDtm):Observable<any>{
-    return this.http.post(`${this.base_url}todos`, {project_id, todo});
+  postData(todo: ITodoDtm):Observable<any>{
+    return this.http.post(`${this.base_url}todos`,  todo);
   }
 }

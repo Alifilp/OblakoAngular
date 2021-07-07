@@ -1,0 +1,24 @@
+
+::ng-deep .md-grid-tile .mat-grid-tile .mat-figure {
+  align-items: flex-start;
+}
+.toolbar {
+  background-color: #1976d2;
+  color: white;
+}
+.centreSpan{
+  margin-left: 50%
+}
+.transpanentButton {
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+  color: white;
+}
+body{
+  background-color: #e8e8e8;
+}
+

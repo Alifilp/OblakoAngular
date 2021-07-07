@@ -1,20 +1,29 @@
 <form [formGroup]="taskForm">
-<h1 mat-dialog-title>Новая задача</h1>
-<div mat-dialog-content>
-   <mat-form-field appearance="fill">
-    <input matInput formControlName= 'title' />
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Категория</mat-label>
-    <mat-select formControlName="project_id">
-      <mat-option *ngFor="let prj of prjs" [value]="prj.id" >
-        {{prj.title}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
-<div mat-dialog-actions>
-  <button mat-button>Отмена</button>
-  <button mat-button >Ок</button>
-</div>
+  <h1 mat-dialog-title style="text-align: center">Новая задача</h1>
+  <div mat-dialog-content>
+    <mat-form-field appearance="fill" class="my-input">
+      <input [placeholder]="'Новая задача'" matInput formControlName= 'title' />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="my-input">
+      <mat-label>Категория</mat-label>
+      <mat-select formControlName="project_id">
+        <mat-option *ngFor="let prj of data.projects" [value]="prj.id" >
+          {{prj.title}}
+        </mat-option>
+        <mat-option [value]="null" >
+          Создать новую
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <ng-container  formGroupName="project">
+      <mat-form-field *ngIf="taskForm?.get('project_id')?.value === null" appearance="fill">
+        <input [placeholder]="'Новая категория'" matInput formControlName= 'title' />
+      </mat-form-field>
+    </ng-container>
+  </div>
+  <div mat-dialog-actions class="example-button-row">
+    <button mat-raised-button mat-dialog-close (click)="onNoClick()" class="my-button">Отмена</button>
+    <button mat-raised-button [disabled]="taskForm.invalid" color="primary" class="my-button"
+            cdkFocusInitial (click)="onApplyClick()">Ок</button>
+  </div>
 </form>

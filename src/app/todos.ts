@@ -1,5 +1,11 @@
 export interface ITodoDtm {
-  title: string
+  todo: {
+    title: string;
+  };
+  project_id?: number;
+  project: {
+    title?: string;
+  }
 }
 
 export class Todo {
@@ -7,5 +13,5 @@ export class Todo {
 }
 
 export class Project {
-  constructor(public id: number, public title: string,public items: Todo[]){}
+  constructor(public id: number, public title: string,public todos: Todo[]){}
 }

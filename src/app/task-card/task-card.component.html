@@ -1,9 +1,14 @@
-<mat-card>{{prj?.title}}</mat-card>
-<div *ngFor="let todo of prj.items">
-  <section class="example-section">
-    <mat-checkbox class="example-margin" (change)="onCheckBoxUpdate(todo.id) " [checked]="todo.is_completed"
-    [color]="">
-      <span>{{todo?.title}}</span></mat-checkbox>
-  </section>
-</div>
+<div class="task-card">
+  <mat-card><b>{{project?.title}}</b></mat-card>
+  <div *ngFor="let todo of project.todos" class = "div-border">
+    <section class="example-section">
+      <mat-checkbox class="example-margin" (change)="onCheckBoxUpdate(todo.id)" [checked]="todo.is_completed">
+        <span class = "span-check" *ngIf="todo.is_completed === true; else unComplete">{{todo?.title}}</span>
+        <ng-template #unComplete>
+          <span>{{todo?.title}}</span>
+        </ng-template>
+      </mat-checkbox>
+    </section>
+  </div>
 
+</div>

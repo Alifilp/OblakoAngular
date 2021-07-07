@@ -1,7 +1,11 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
-import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {FormGroup, FormBuilder, FormControl} from '@angular/forms';
-import {Project} from "../todos";
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ITodoDtm, Project} from "../todos";
+
+interface DialogData {
+  projects: Project[]
+}
 
 @Component({
   selector: 'app-dialog',
@@ -9,26 +13,38 @@ import {Project} from "../todos";
   styleUrls: ['./dialog.component.css']
 })
 export class DialogComponent implements OnInit {
-  // @ts-ignore
-  taskForm: FormGroup;
 
-  constructor(public dialogRef: MatDialogRef<DialogComponent>, private formBuilder: FormBuilder) {
+  taskForm!: FormGroup;
 
+  constructor(
+    public dialogRef: MatDialogRef<DialogComponent>,
+    private formBuilder: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+  ) {
   }
 
-   prjs: Project []=[];
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-  buildForm(){
-    this.taskForm = this.formBuilder.group({
-      title: new FormControl(['']),
-      project_title: new FormControl(['']),
-      project_id: new FormControl([])
+  buildForm() {
+    this.taskForm = this.formBuilder.group({ // Сделала объект того же типа, что и ITodoDtm
+      title: ['', Validators.required],
+      project_id: '',
+      project: this.formBuilder.group({
+        title: null,
+      })
     });
-    }
+  }
+
   ngOnInit() {
     this.buildForm();
   }
 
+  onApplyClick() {
+    const data: ITodoDtm = this.taskForm.value;
+    this.dialogRef.close(data);
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
 }
+
