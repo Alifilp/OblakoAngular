@@ -13,10 +13,8 @@ export class HttpService{
   constructor(private http: HttpClient){ }
 
   getData(): Observable<Project[]>{
-    return this.http.get(`${this.base_url}projects`).pipe(map((data:any)=>{
-        return data.map(function(prj: any): Project {
-        return new Project(prj.id, prj.title, prj.todos);
-      });
+    return this.http.get(`${this.base_url}projects`).pipe(map((data: any) => {
+      return plainToClass(Project, data);
     }));
   }
   patchData(project_id: number, todo_id: number):Observable<any>{
