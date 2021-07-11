@@ -2,6 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ITodoDtm, Project} from "../todos";
+import {Subscription} from "rxjs";
 
 interface DialogData {
   projects: Project[]
@@ -15,7 +16,7 @@ interface DialogData {
 export class DialogComponent implements OnInit {
 
   taskForm!: FormGroup;
-
+  private projectIdSubscription!: Subscription;
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,
     private formBuilder: FormBuilder,
@@ -24,27 +25,39 @@ export class DialogComponent implements OnInit {
   }
 
   buildForm() {
-    this.taskForm = this.formBuilder.group({ // Сделала объект того же типа, что и ITodoDtm
+    this.taskForm = this.formBuilder.group({ // Объект того же типа, что и ITodoDtm
       title: ['', Validators.required],
-      project_id: '',
+      project_id: ['', Validators.minLength(1)],
       project: this.formBuilder.group({
-        title: null,
+        title: null
       })
     });
   }
 
+
+  listTrack (index: number, item:Project) {
+    return index;
+  }
   ngOnInit() {
     this.buildForm();
+    /*this.projectIdSubscription = this.taskForm.get("project_id")!.valueChanges.subscribe(data=> {
+        this.changeValidators()
+      });*/
   }
 
   onApplyClick() {
     const data: ITodoDtm = this.taskForm.value;
     this.dialogRef.close(data);
   }
-
+  changeValidators(){
+    if (this.taskForm.get('project_id')?.value === null){
+      this.taskForm.controls['project.title'].setValidators(Validators.required)
+      this.taskForm.controls['project.title'].updateValueAndValidity()
+    }
+  }
   onNoClick(): void {
     this.dialogRef.close();
-  }
+      }
 
 }
 

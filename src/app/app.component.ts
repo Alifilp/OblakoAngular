@@ -45,7 +45,9 @@ export class AppComponent implements OnInit {
   createToDo(data: ITodoDtm) { //Запрос на создание задачи
     return this.httpService.postData(data)
   }
-
+  trackProject(index: number, item:Project) {
+    return index;
+  }
   ngOnInit() {
   }
 }

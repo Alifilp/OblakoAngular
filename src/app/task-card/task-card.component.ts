@@ -1,5 +1,5 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core'
-import {Project} from '../todos';
+import {Project, Todo} from '../todos';
 
 @Component({
   selector: 'app-card',
@@ -13,6 +13,9 @@ export class TaskCardComponent implements OnInit{
   }
   onCheckBoxUpdate (todo_id: number) {
     this.onTodoUpdate.emit(todo_id)
+  }
+  todosTrack(index: number, item:Todo) {
+    return index;
   }
   ngOnInit(){
   }

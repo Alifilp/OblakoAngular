@@ -9,7 +9,7 @@
 </mat-toolbar>
 <body>
 <mat-grid-list cols="3" rowHeight="350px" >
-  <div *ngFor="let project of projects$ | async">
+  <div *ngFor="let project of projects$ | async; trackBy: trackProject">
     <mat-grid-tile>
       <app-card [project] = "project" (onTodoUpdate)="updateTodo(project.id, $event)"></app-card>
     </mat-grid-tile>

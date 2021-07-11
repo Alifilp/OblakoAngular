@@ -7,7 +7,7 @@
     <mat-form-field appearance="fill" class="my-input">
       <mat-label>Категория</mat-label>
       <mat-select formControlName="project_id">
-        <mat-option *ngFor="let prj of data.projects" [value]="prj.id" >
+        <mat-option *ngFor="let prj of data.projects; trackBy: listTrack" [value]="prj.id" >
           {{prj.title}}
         </mat-option>
         <mat-option [value]="null" >
@@ -16,7 +16,7 @@
       </mat-select>
     </mat-form-field>
     <ng-container  formGroupName="project">
-      <mat-form-field *ngIf="taskForm?.get('project_id')?.value === null" appearance="fill">
+      <mat-form-field *ngIf="taskForm?.get('project_id')?.value === null" appearance="fill" class="my-input">
         <input [placeholder]="'Новая категория'" matInput formControlName= 'title' />
       </mat-form-field>
     </ng-container>
