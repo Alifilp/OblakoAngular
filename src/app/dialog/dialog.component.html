@@ -23,7 +23,8 @@
   </div>
   <div mat-dialog-actions class="example-button-row">
     <button mat-raised-button mat-dialog-close (click)="onNoClick()" class="my-button">Отмена</button>
-    <button mat-raised-button [disabled]="taskForm.invalid" color="primary" class="my-button"
+    <button mat-raised-button [disabled]="taskForm.invalid || (!taskForm.get('project_id')?.value &&
+     !taskForm.get('project')?.get('title')?.value)" color="primary" class="my-button"
             cdkFocusInitial (click)="onApplyClick()">Ок</button>
   </div>
 </form>

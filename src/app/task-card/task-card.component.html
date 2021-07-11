@@ -2,7 +2,8 @@
   <mat-card><b>{{project?.title}}</b></mat-card>
   <div *ngFor="let todo of project.todos; trackBy: todosTrack" class = "div-border">
     <section class="example-section">
-      <mat-checkbox class="example-margin" (change)="onCheckBoxUpdate(todo.id)" [checked]="todo.is_completed">
+      <mat-checkbox class="example-margin" (change)="onCheckBoxUpdate(todo, !todo.is_completed)"
+                    [checked]="todo.is_completed">
         <span class = "span-check" *ngIf="todo.is_completed === true; else unComplete">{{todo?.title}}</span>
         <ng-template #unComplete>
           <span>{{todo?.title}}</span>

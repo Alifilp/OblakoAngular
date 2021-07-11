@@ -1,10 +1,12 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {HttpService} from './http.service';
-import {ITodoDtm, Project} from './todos';
-import {BehaviorSubject, Observable} from "rxjs";
-import {filter, shareReplay, switchMap} from "rxjs/operators";
+import {ITodoDtm, Project, Todo} from './todos';
+import {Observable} from "rxjs";
+import {filter, first, switchMap} from "rxjs/operators";
 import {MatDialog} from "@angular/material/dialog";
 import {DialogComponent} from "./dialog/dialog.component";
+import {ProjectsService} from "./projects.service";
+
 
 @Component({
   selector: 'app-root',
@@ -15,17 +17,16 @@ import {DialogComponent} from "./dialog/dialog.component";
 })
 export class AppComponent implements OnInit {
 
-  dataUpdateTrigger$ = new BehaviorSubject('init');//Триггер обновления задач, сразу изменяем чтобы сработал
-  projects$: Observable<Project[]> = this.dataUpdateTrigger$.pipe(//Подписываемся на обновления project и делаем предобработку
-    switchMap(() => this.httpService.getData()), //Ловим последнее изменение подписки, отменяем предыдущие, подписываемся на запрос
-    shareReplay() //Кэшируем данные что бы не вызывать каждый раз запрос для каждой подписки
-  );
+  projects$: Observable<Project[]> = this.projectsService.projects$.asObservable();
 
-  constructor(private httpService: HttpService, public dialog: MatDialog) {}
+  constructor(private httpService: HttpService,
+              public dialog: MatDialog,
+              private projectsService: ProjectsService) {
+  }
 
-  updateTodo(project_id: number, todo_id: number) { //Запрос на обновление задачи
-    this.httpService.patchData(project_id, todo_id).subscribe(() => {
-      this.dataUpdateTrigger$.next('update');// Подписка, чтобы включить триггер обновления списка задач
+  updateTodo(project_id: number, todo: Todo) { //Запрос на обновление задачи
+    this.httpService.patchData(project_id, todo.id).subscribe(() => {
+      this.projectsService.updateTaskInProject(todo, project_id);
     })
   }
 
@@ -39,15 +40,21 @@ export class AppComponent implements OnInit {
       filter(value => !!value), // Фильтр, чтобы дальнейшие действия вызывались, только если данные есть
       switchMap((res: ITodoDtm) => this.createToDo(res)) // Запрос к серверу для создания задачи
     ).subscribe((res) => { //Ловим данные
-      this.dataUpdateTrigger$.next('create'); // Подписка, чтобы включить триггер обновления списка задач
+      this.projectsService.upsertProject(res);
     });
   }
+
   createToDo(data: ITodoDtm) { //Запрос на создание задачи
     return this.httpService.postData(data)
   }
-  trackProject(index: number, item:Project) {
+
+  trackProject(index: number) {
     return index;
   }
+
   ngOnInit() {
+    this.httpService.getData().pipe(first()).subscribe(res => {
+      this.projectsService.updateProjects(res);
+    })
   }
 }

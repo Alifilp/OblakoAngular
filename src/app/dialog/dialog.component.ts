@@ -2,7 +2,6 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ITodoDtm, Project} from "../todos";
-import {Subscription} from "rxjs";
 
 interface DialogData {
   projects: Project[]
@@ -16,7 +15,6 @@ interface DialogData {
 export class DialogComponent implements OnInit {
 
   taskForm!: FormGroup;
-  private projectIdSubscription!: Subscription;
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,
     private formBuilder: FormBuilder,
@@ -33,28 +31,18 @@ export class DialogComponent implements OnInit {
       })
     });
   }
-
-
-  listTrack (index: number, item:Project) {
+  listTrack (index: number) {
     return index;
   }
   ngOnInit() {
     this.buildForm();
-    /*this.projectIdSubscription = this.taskForm.get("project_id")!.valueChanges.subscribe(data=> {
-        this.changeValidators()
-      });*/
   }
 
   onApplyClick() {
     const data: ITodoDtm = this.taskForm.value;
     this.dialogRef.close(data);
   }
-  changeValidators(){
-    if (this.taskForm.get('project_id')?.value === null){
-      this.taskForm.controls['project.title'].setValidators(Validators.required)
-      this.taskForm.controls['project.title'].updateValueAndValidity()
-    }
-  }
+
   onNoClick(): void {
     this.dialogRef.close();
       }

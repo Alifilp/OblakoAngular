@@ -4,8 +4,8 @@ import { plainToClass } from 'class-transformer';
 import { environment } from 'src/environments/environment';
 
 import {Observable} from 'rxjs';
-import { map } from 'rxjs/operators';
-import {ITodoDtm, Project} from "./todos";
+import {map, mapTo} from 'rxjs/operators';
+import {ITodoDtm, Project, IProject} from "./todos";
 
 @Injectable()
 export class HttpService{
@@ -14,14 +14,14 @@ export class HttpService{
   constructor(private http: HttpClient){ }
 
   getData(): Observable<Project[]>{
-    return this.http.get(`${this.baseUrl}projects`).pipe(map((data: any) => {
-      return plainToClass(Project, data);
+    return this.http.get(`${this.baseUrl}projects`).pipe(map((data) => {
+      return plainToClass(Project, data  as IProject[]);
     }));
   }
-  patchData(project_id: number, todo_id: number):Observable<any>{
-    return this.http.patch(`${this.baseUrl}projects/${project_id}/todos/${todo_id}`, {});
+  patchData(project_id: number, todo_id: number):Observable<Boolean>{
+    return this.http.patch(`${this.baseUrl}projects/${project_id}/todos/${todo_id}`, {}).pipe(mapTo(true));
   }
-  postData(todo: ITodoDtm):Observable<any>{
-    return this.http.post(`${this.baseUrl}todos`,  todo);
+  postData(todo: ITodoDtm):Observable<Project>{
+    return this.http.post(`${this.baseUrl}todos`,  todo).pipe(map((value) => plainToClass(Project, value as IProject)));
   }
 }

@@ -15,3 +15,18 @@ export class Todo {
 export class Project {
   constructor(public id: number, public title: string,public todos: Todo[]){}
 }
+
+export interface IProject {
+  created_at: string;
+  id: number;
+  title: string;
+  todos: {
+    created_at: string;
+    id: number;
+    is_completed: boolean;
+    project_id: number;
+    title: string;
+    updated_at: string;
+  }[];
+  updated_at: string;
+}

@@ -11,10 +11,10 @@ export class TaskCardComponent implements OnInit{
   @Output('onTodoUpdate') onTodoUpdate = new EventEmitter();
   constructor() {
   }
-  onCheckBoxUpdate (todo_id: number) {
-    this.onTodoUpdate.emit(todo_id)
+  onCheckBoxUpdate (todo: Todo, is_completed: boolean) {
+    this.onTodoUpdate.emit({...todo, is_completed})
   }
-  todosTrack(index: number, item:Todo) {
+  todosTrack(index: number) {
     return index;
   }
   ngOnInit(){
